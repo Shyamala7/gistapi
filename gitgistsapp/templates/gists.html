@@ -1,0 +1,24 @@
+<form>
+    <div class="col-lg-6">
+        <input type="text" class="form-control" ng-model="search" value="wangruohui"/>
+    </div>
+    <div class="col-lg-6">
+        <button type="button" class="btn btn-primary" ng-click="fetchDetails()">Fetch</button>
+    </div>
+    <div class="col-lg-12  table-responsive">
+    <table class="table table-bordered" ng-show="showResults">
+        <thead>
+            <th >Description</th>
+            <th width="20%">Languages</th>
+            <th width="50%">Forks</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in data | filter:public">
+                <td class="col-md-4">{{d.description}}</td>
+                <td class="col-md-4"><span ng-repeat="language in d.languages">{{language}} <span ng-if="!$last">, </span> </span></td>
+                <td class="col-md-4"><span ng-repeat="fork in d.forks | orderBy: '-created_at' |  limitTo : 3 "><a target="_blank" href="{{fork.html_url}}"><img src="{{fork.owner.avatar_url}}" width="50" height="50"/></a></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</form>
